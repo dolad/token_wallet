@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx truffle test --network development",
+    "test:ganache":"npx ganache-cli -p 8545",
     "start:ganache": "npx ganache-cli -p 8545 && npx truffle migrate -network development" 
   },
   "author": "",
