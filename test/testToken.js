@@ -1,19 +1,35 @@
-const myToken = artifacts.require('MyToken');
-let contractInstance;
+const MyToken = artifacts.require('MyToken');
+const BigNumber = web3.BigNumber;
 contract("myToken", async account => {
-    beforeEach(async () => {
-       contractInstance = await myToken.deployed()
+    let contractInstance;
+    const token = 'DTN';
+    const globalname= 'DavidToken';
+    const allocate_token= 1000000;
+    beforeEach( async () => {
+      contractInstance = await MyToken.deployed();
      })
-     it("should return the name", async () => {
-        const returnName = await contractInstance("David");
-         assert.equal(returnName, "David")
-     } );
+     it("it return the appropraite name ", async () => {
+         const name = await contractInstance.name(); 
+         assert.equal(name, globalname);
+     });
      it("should return the tokenName", async () => {
-        const returnName = await contractInstance("TKN");
-         assert.equal(returnName, "TKN")
-     } );
+         const tokenSymbol = await contractInstance.symbol();
+         assert.equal(tokenSymbol, token);
+     });
     it("should return decimal", async () => {
        const returnDecimal = await contractInstance.decimals();
-        assert.equal(returnDecimal,10000)
-    } );
+        assert.equal(returnDecimal.toString(), 5);
+    });
+    it("should have appropriate totalSupply", async () => {
+        const totalSupply = await contractInstance.allocate_token();
+         assert.equal(totalSupply.toNumber(), allocate_token);
+     });
+
+     it("allocates the initial supply to minter deployment", async () => {
+        const deployer = account[0];
+        const initialBalance = await contractInstance.balanceOf(deployer);
+        const totalSupply = await contractInstance.allocate_token();
+         assert.equal(totalSupply.toNumber(), initialBalance.toNumber());
+     });
+    
 })
