@@ -1,5 +1,4 @@
 const MyToken = artifacts.require('MyToken');
-const BigNumber = web3.BigNumber;
 contract("myToken", async account => {
     let contractInstance;
     const token = 'DTN';
@@ -24,8 +23,7 @@ contract("myToken", async account => {
         const totalSupply = await contractInstance.allocate_token();
          assert.equal(totalSupply.toNumber(), allocate_token);
      });
-
-     it("allocates the initial supply to minter deployment", async () => {
+    it("allocates the initial supply to minter deployment", async () => {
         const deployer = account[0];
         const initialBalance = await contractInstance.balanceOf(deployer);
         const totalSupply = await contractInstance.allocate_token();
