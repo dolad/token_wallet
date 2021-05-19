@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "npx truffle test --network development",
-    "test:ganache":"npx ganache-cli -p 8545",
-    "start:ganache": "npx ganache-cli -p 8545 && npx truffle migrate -network development" 
+    "test:ganache": "npx ganache-cli -p 8545",
+    "start:ganache": "npx ganache-cli -p 8545 && npx truffle migrate -network development"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@openzeppelin/test-helpers": "^0.5.11",
     "ganache-cli": "^6.12.2",
     "truffle": "^5.2.6"
   },
